@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split Bill Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h1>Split Bill Calculator</h1>
+<form id="splitForm" action="/calculate" method="post">
+    <label for="numFriends">Number of Friends:</label>
+    <input type="number" id="numFriends" name="numFriends" required><br><br>
+
+    <div id="friendInputs">
+        <!-- Friend input fields will be dynamically generated here -->
+    </div>
+
+    <button type="submit">Calculate</button>
+</form>
+
+<script>
+        document.getElementById('numFriends').addEventListener('input', function() {
+            const numFriends = parseInt(this.value);
+            const friendInputsDiv = document.getElementById('friendInputs');
+            friendInputsDiv.innerHTML = '';
+
+            for (let i = 1; i <= numFriends; i++) {
+                const friendIndex = i;
+                const friendNameLabel = document.createElement('label');
+                friendNameLabel.textContent = 'Friend ' + friendIndex + ' Name:';
+                const friendNameInput = document.createElement('input');
+                friendNameInput.type = 'text';
+                friendNameInput.name = 'friendNames';
+                friendNameInput.required = true;
+
+                const friendPaymentLabel = document.createElement('label');
+                friendPaymentLabel.textContent = 'Friend ' + friendIndex + ' Payment Amount:';
+                const friendPaymentInput = document.createElement('input');
+                friendPaymentInput.type = 'number';
+                friendPaymentInput.name = 'friendPayments';
+                friendPaymentInput.required = true;
+
+                friendInputsDiv.appendChild(friendNameLabel);
+                friendInputsDiv.appendChild(friendNameInput);
+                friendInputsDiv.appendChild(document.createElement('br'));
+                friendInputsDiv.appendChild(friendPaymentLabel);
+                friendInputsDiv.appendChild(friendPaymentInput);
+                friendInputsDiv.appendChild(document.createElement('br'));
+            }
+        });
+    </script>
+</body>
+</html>
